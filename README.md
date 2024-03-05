@@ -11,9 +11,9 @@ El projecte s'ha de poder desplegar en mode desenvolupament simplement fent dock
 
 # Aquest fitxer ha de contenir com a mínim:
  * Nom dels integrants
- * Nom del projecte
+ * Furbol
  * Petita descripció
- * Adreça del gestor de tasques (taiga, jira, trello...)
+ * Adreça del gestor de tasques (Taiga, jira, trello...)
  * Adreça del prototip gràfic del projecte (Penpot, figma, moqups...)
- * URL de producció (quan la tingueu)
+ * URL de producció http://furbol.daw.inspedralbes.cat/
  * Estat: (explicació d'en quin punt està)
