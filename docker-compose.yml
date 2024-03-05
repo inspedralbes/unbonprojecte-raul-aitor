@@ -1,0 +1,50 @@
+services:
+  db:
+    container_name: unbonprojecte_db
+    image: mysql:8.2.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: unbonprojecte
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+    ports:
+      - 3306:3306
+    volumes:
+      - /mysql_data:/var/lib/mysql
+      - ./mysql/visortpv.sql:/docker-entrypoint-initdb.d/visortpv.sql
+  
+  phpmyadmin:
+    container_name: unbonprojecte_phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - 9090:80
+    depends_on:
+      - db
+
+  laravel:
+    container_name: unbonprojecte_laravel
+    build: ./back
+    volumes:
+      - ./back:/var/www/html
+    ports:
+      - 8000:80
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html/public
+    command: /bin/sh -c "chown -R www-data:www-data * && php /var/www/html/artisan migrate --force && php /var/www/html/artisan migrate:fresh --seed && apache2-foreground"
+    depends_on:
+      - db
+
+  vue:
+    container_name: unbonprojecte_vue
+    image: node:lts-bullseye-slim
+    restart: always
+    volumes:
+      - ./web:/usr/src/app
+    working_dir: /usr/src/app
+    ports:
+      - 3000:3000
+    command: sh -c "npm install && npm run dev"
+
+

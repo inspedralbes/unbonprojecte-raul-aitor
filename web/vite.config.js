@@ -8,6 +8,16 @@ export default defineConfig({
   plugins: [
     vue(),
   ],
+  server: {
+    host: true,
+    hmr: {
+      clientPort: 3000,
+    },
+    port: 3000,
+    watch: {
+      usePolling: true,
+    },
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
