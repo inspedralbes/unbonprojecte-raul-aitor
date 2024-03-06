@@ -12,7 +12,7 @@ class FutbolistaController extends Controller
      */
     public function index()
     {
-        //
+        return futbolista::all();
     }
 
     /**
